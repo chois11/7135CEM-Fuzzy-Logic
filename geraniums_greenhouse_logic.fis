@@ -1,0 +1,164 @@
+[System]
+Name='geraniums_greenhouse_logic'
+Type='mamdani'
+Version=2.0
+NumInputs=5
+NumOutputs=5
+NumRules=55
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='temperature'
+Range=[-10 30]
+NumMFs=5
+MF1='very_cold':'trapmf',[-10 -10 -4 1]
+MF2='cold':'trimf',[-1 2 7]
+MF3='moderate':'trimf',[6 10 15]
+MF4='hot':'trimf',[13 17 23]
+MF5='very_hot':'trapmf',[20 24 30 30]
+
+[Input2]
+Name='humidity'
+Range=[0 100]
+NumMFs=3
+MF1='dry':'trapmf',[0 0 30 44]
+MF2='comfort':'trimf',[30 50 70]
+MF3='wet':'trapmf',[55 70 100 100]
+
+[Input3]
+Name='light'
+Range=[0 100]
+NumMFs=5
+MF1='night':'trapmf',[0 0 2 21]
+MF2='twilight':'trimf',[10 25 50]
+MF3='dawn':'trimf',[25 50 75]
+MF4='sunrise':'trimf',[50 75 90]
+MF5='day':'trapmf',[77 97 100 100]
+
+[Input4]
+Name='soil_moisture'
+Range=[0 100]
+NumMFs=5
+MF1='too_low':'trapmf',[0 0 10 20]
+MF2='low':'trimf',[10 30 50]
+MF3='optimal':'trimf',[30 50 70]
+MF4='excess':'trimf',[50 70 90]
+MF5='full':'trapmf',[80 90 100 100]
+
+[Input5]
+Name='Ph'
+Range=[3 8]
+NumMFs=4
+MF1='very_acid':'trapmf',[3 3 4 5]
+MF2='acid':'trimf',[4 5 6]
+MF3='moderate':'trimf',[5 6 7]
+MF4='alkaline':'trapmf',[6 7 8 8]
+
+[Output1]
+Name='heater'
+Range=[0 20]
+NumMFs=5
+MF1='very_low':'trapmf',[0 0 2 3.5]
+MF2='low':'trimf',[2 5 8]
+MF3='medium':'trimf',[6 9 12]
+MF4='high':'trimf',[11 14 17]
+MF5='very_high':'trapmf',[15 17 20 20]
+
+[Output2]
+Name='cooling fan'
+Range=[0 20]
+NumMFs=5
+MF1='very_low':'trapmf',[0 0 2 3.5]
+MF2='low':'trimf',[2 5 8]
+MF3='medium':'trimf',[6 9 12]
+MF4='high':'trimf',[11 14 17]
+MF5='very_high':'trapmf',[15 17 20 20]
+
+[Output3]
+Name='sprinklers'
+Range=[0 20]
+NumMFs=5
+MF1='very_short_distance':'trapmf',[0 0 2 3.5]
+MF2='short_distance':'trimf',[2.02865329512894 5.02865329512894 8.02865329512894]
+MF3='medium':'trimf',[6 9 12]
+MF4='far_distance':'trimf',[11 14 17]
+MF5='very_far_distance':'trapmf',[15 17 20 20]
+
+[Output4]
+Name='water_pumps'
+Range=[0 20]
+NumMFs=5
+MF1='minimum_flow':'trapmf',[0 0 2 3.5]
+MF2='low_flow':'trimf',[2 5 8]
+MF3='medium_flow':'trimf',[6 9 12]
+MF4='high_flow':'trimf',[11 14 17]
+MF5='maximum_flow':'trapmf',[15 17 20 20]
+
+[Output5]
+Name='lamps'
+Range=[0 20]
+NumMFs=3
+MF1='dim':'trimf',[-10 0 10]
+MF2='medium':'trimf',[4.71 10.1 14.0830945558739]
+MF3='bright':'trimf',[9.91404011461318 19.9140401146132 29.9140401146132]
+
+[Rules]
+0 0 1 0 0, 0 0 0 0 1 (1) : 1
+0 0 2 0 0, 0 0 0 0 1 (1) : 1
+0 0 3 0 0, 0 0 0 0 1 (1) : 1
+0 0 4 0 0, 0 0 0 0 2 (1) : 1
+0 0 5 0 0, 0 0 0 0 3 (1) : 1
+1 0 0 0 0, 5 1 0 0 0 (1) : 1
+2 0 0 0 0, 4 2 0 0 0 (1) : 1
+3 0 0 0 0, 3 3 0 0 0 (1) : 1
+4 0 0 0 0, 2 4 0 0 0 (1) : 1
+5 0 0 0 0, 1 5 0 0 0 (1) : 1
+0 1 0 1 0, 0 0 5 5 0 (1) : 1
+0 1 0 2 0, 0 0 4 4 0 (1) : 1
+0 2 0 3 0, 0 0 3 3 0 (1) : 1
+0 3 0 4 0, 0 0 2 2 0 (1) : 1
+0 3 0 5 0, 0 0 1 1 0 (1) : 1
+0 0 1 0 0, 0 0 1 0 1 (1) : 1
+0 0 2 0 0, 0 0 1 0 1 (1) : 1
+0 0 3 0 0, 0 0 1 0 2 (1) : 1
+0 0 4 0 0, 0 0 1 0 2 (1) : 1
+0 0 5 0 0, 0 0 1 0 3 (1) : 1
+0 0 0 1 0, 0 0 5 5 0 (1) : 1
+0 0 0 2 0, 0 0 4 4 0 (1) : 1
+0 0 0 3 0, 0 0 3 3 0 (1) : 1
+0 0 0 4 0, 0 0 2 2 0 (1) : 1
+0 0 0 5 0, 0 0 1 1 0 (1) : 1
+0 0 0 0 1, 0 0 0 5 0 (1) : 1
+0 0 0 0 2, 0 0 0 4 0 (1) : 1
+0 0 0 0 3, 0 0 0 3 0 (1) : 1
+0 0 0 0 4, 0 0 0 3 0 (1) : 1
+1 1 0 1 1, 5 1 5 5 0 (1) : 1
+1 1 0 2 1, 5 1 4 5 0 (1) : 1
+1 1 0 2 1, 5 1 5 4 0 (1) : 1
+1 2 0 3 3, 5 1 3 3 0 (1) : 1
+1 3 0 4 3, 5 1 1 2 0 (1) : 1
+1 3 0 5 3, 5 1 0 0 0 (1) : 1
+2 1 0 1 1, 4 2 4 5 0 (1) : 1
+2 1 0 2 1, 4 2 4 4 0 (1) : 1
+2 2 0 3 3, 4 2 3 3 0 (1) : 1
+2 2 0 4 3, 4 2 3 2 0 (1) : 1
+2 3 0 5 3, 4 2 1 1 0 (1) : 1
+3 1 0 1 1, 3 3 5 5 0 (1) : 1
+3 1 0 2 1, 3 3 4 4 0 (1) : 1
+3 2 0 3 3, 3 3 3 3 0 (1) : 1
+3 2 0 4 3, 3 3 3 3 0 (1) : 1
+3 2 0 4 3, 3 3 3 2 0 (1) : 1
+3 3 0 5 3, 3 3 1 1 0 (1) : 1
+4 1 0 1 3, 2 4 5 5 0 (1) : 1
+4 1 0 2 3, 2 4 4 4 0 (1) : 1
+4 2 0 3 3, 2 4 3 3 0 (1) : 1
+4 2 0 4 3, 2 4 3 2 0 (1) : 1
+4 3 0 5 3, 2 4 1 1 0 (1) : 1
+5 1 0 1 3, 1 5 5 5 0 (1) : 1
+5 1 0 2 3, 1 5 5 5 0 (1) : 1
+5 2 0 3 3, 1 5 3 3 0 (1) : 1
+5 3 0 5 3, 1 5 1 1 0 (1) : 1
